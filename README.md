@@ -69,7 +69,8 @@ interface Contact {
     name: string,
     phones: PhoneEntry[],
     emails: EmailEntry[],
-    postalAddresses: AddressEntry[]
+    postalAddresses: AddressEntry[],
+    identifier: string
 }
 
 interface ContactPhoneSelection {
