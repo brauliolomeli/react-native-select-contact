@@ -39,8 +39,8 @@ RCT_EXPORT_METHOD(openContactSelection:(RCTPromiseResolveBlock)resolve rejecter:
   NSMutableArray *phones = [[NSMutableArray alloc] init];
   NSMutableArray *emails = [[NSMutableArray alloc] init];
   NSMutableArray *addresses = [[NSMutableArray alloc] init];
-  return [[NSMutableDictionary alloc] initWithObjects:@[@"", @"", @"", @"", phones, emails, addresses]
-                                              forKeys:@[@"name", @"givenName", @"middleName", @"familyName", @"phones", @"emails", @"postalAddresses"]];
+  return [[NSMutableDictionary alloc] initWithObjects:@[@"", @"", @"", @"", @"", phones, emails, addresses]
+                                              forKeys:@[@"name", @"givenName", @"middleName", @"familyName", @"identifier", @"phones", @"emails", @"postalAddresses"]];
 }
 
 #pragma mark - CNContactPickerDelegate
@@ -57,6 +57,7 @@ RCT_EXPORT_METHOD(openContactSelection:(RCTPromiseResolveBlock)resolve rejecter:
   [contactData setValue:contact.givenName forKey:@"givenName"];
   [contactData setValue:contact.middleName forKey:@"middleName"];
   [contactData setValue:contact.familyName forKey:@"familyName"];
+  [contactData setValue:contact.identifier forKey:@"identifier"];
   
   //Return phone numbers
   NSMutableArray* phoneEntries = [contactData valueForKey:@"phones"];

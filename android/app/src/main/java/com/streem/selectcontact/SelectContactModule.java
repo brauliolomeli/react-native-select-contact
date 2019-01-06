@@ -196,6 +196,12 @@ public class SelectContactModule extends ReactContextBaseJavaModule implements A
             String middleName = cursor.getString(middleNameColumn);
             contactData.putString("middleName", middleName);
         }
+
+        int recordIdColumn = cursor.getColumnIndex(StructuredName.CONTACT_ID);
+        if (recordIdColumn != -1) {
+            String recordID = cursor.getString(recordIdColumn);
+            contactData.putString("recordID", recordID);
+        }
     }
 
     private void addPostalData(WritableArray postalAddresses, Cursor cursor, Activity activity) {
