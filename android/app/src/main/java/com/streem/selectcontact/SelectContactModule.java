@@ -129,6 +129,7 @@ public class SelectContactModule extends ReactContextBaseJavaModule implements A
             contactData.putArray("phones", phones);
             contactData.putArray("emails", emails);
             contactData.putArray("postalAddresses", postalAddresses);
+            contactData.putString("identifier", id);
 
             if (foundData) {
                 mContactsPromise.resolve(contactData);
@@ -179,9 +180,6 @@ public class SelectContactModule extends ReactContextBaseJavaModule implements A
     private void addNameData(WritableMap contactData, Cursor cursor) {
         int displayNameIndex = cursor.getColumnIndex(StructuredName.DISPLAY_NAME);
         contactData.putString("name", cursor.getString(displayNameIndex));
-
-        int contactIdIndex = cursor.getColumnIndex(ContactsContract.RawContacts.CONTACT_ID);
-        contactData.putString("identifier", cursor.getString(contactIdIndex));
 
         int givenNameColumn = cursor.getColumnIndex(StructuredName.GIVEN_NAME);
         if (givenNameColumn != -1) {
