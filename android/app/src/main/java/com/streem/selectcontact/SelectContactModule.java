@@ -11,6 +11,7 @@ import android.provider.ContactsContract.CommonDataKinds.StructuredName;
 import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Contacts.Entity;
+import android.provider.ContactsContract;
 import android.util.Log;
 
 import com.facebook.react.bridge.ActivityEventListener;
@@ -179,6 +180,9 @@ public class SelectContactModule extends ReactContextBaseJavaModule implements A
         int displayNameIndex = cursor.getColumnIndex(StructuredName.DISPLAY_NAME);
         contactData.putString("name", cursor.getString(displayNameIndex));
 
+        int contactIdIndex = cursor.getColumnIndex(ContactsContract.RawContacts.CONTACT_ID);
+        contactData.putString("identifier", cursor.getString(contactIdIndex));
+
         int givenNameColumn = cursor.getColumnIndex(StructuredName.GIVEN_NAME);
         if (givenNameColumn != -1) {
             String givenName = cursor.getString(givenNameColumn);
@@ -197,11 +201,6 @@ public class SelectContactModule extends ReactContextBaseJavaModule implements A
             contactData.putString("middleName", middleName);
         }
 
-        int contactIdColumn = cursor.getColumnIndex(StructuredName.CONTACT_ID);
-        if (contactIdColumn != -1) {
-            String identifier = cursor.getString(contactIdColumn);
-            contactData.putString("identifier", identifier);
-        }
     }
 
     private void addPostalData(WritableArray postalAddresses, Cursor cursor, Activity activity) {
